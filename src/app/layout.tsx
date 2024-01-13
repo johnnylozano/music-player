@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { MainLayoutContainer, Navbar, Sidebar } from "@/components";
+import { SidebarProvider } from "@/context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,46 +19,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="min-h-screen flex flex-grow flex-col bg-black/[.925] ">
-          <header className="from-emerald-950 to-black bg-gradient-to-t h-12">
-            {/* <button className="text-white" onClick={() => setSidebar(!sidebar)}>
-          hello
-        </button> */}
-          </header>
+        <SidebarProvider>
+          <div className="min-h-screen flex flex-grow flex-col bg-black/[.925] ">
+            <Navbar />
 
-          <div className="flex-1 flex flex-col sm:flex-row m-4 gap-4">
-            <div
-              className={`transition-transform duration-300 ease-in-out z-10 translate-x-0`}
-              // className={`transition-transform duration-300 ease-in-out z-10 ${
-              //   sidebar ? "translate-x-0" : "-translate-x-[300px]"
-              // }`}
-            >
-              <div
-                className={`bg-blue-300 h-full w-52 fixed rounded-lg shadow-md shadow-lime-400/[.10]`}
-                // className={`bg-blue-300 h-full w-52 fixed ${
-                //   sidebar ? "" : ""
-                // } rounded-lg shadow-md shadow-lime-400/[.10]`}
-              >
-                <p className="text-white">Sidebar</p>
-              </div>
+            <div className="flex-1 flex flex-col sm:flex-row m-4 gap-4">
+              <Sidebar />
+              <MainLayoutContainer>
+                <div className="absolute inset-0 overflow-auto">
+                  {/* This is where main content goes */}
+                  {children}
+                  {/* Main Content End */}
+                </div>
+              </MainLayoutContainer>
             </div>
 
-            <div
-              className={`relative transition-all duration-300 ease-in-out flex-1 bg-gray-700 rounded-lg shadow-md shadow-lime-400/[.10] ml-52`}
-              // className={`relative transition-all duration-300 ease-in-out flex-1 bg-gray-700 ${
-              //   sidebar ? "ml-52" : "-ml-4"
-              // }  rounded-lg shadow-md shadow-lime-400/[.10]`}
-            >
-              <div className="absolute inset-0 overflow-auto">
-                {/* This is where main content goes */}
-                {children}
-                {/* Main Content End */}
-              </div>
-            </div>
+            {/* <MediaPlayer /> */}
           </div>
-
-          {/* <MediaPlayer /> */}
-        </div>
+        </SidebarProvider>
       </body>
     </html>
   );
