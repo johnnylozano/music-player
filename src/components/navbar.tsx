@@ -14,11 +14,11 @@ function Navbar() {
     <header className="from-emerald-950 to-black bg-gradient-to-t h-12 flex items-center justify-start  gap-3">
       <Button
         size="icon"
-        variant="outline"
+        variant="ghost"
         onClick={toggleSidebar}
-        className="bg-emerald-600 rounded-lg border-emerald-500 shadow-emerald-800 ml-4"
+        className="ml-4 group"
       >
-        <HamburgerMenuIcon className="h-4 w-4" />
+        <HamburgerMenuIcon className="h-6 w-6 text-white group-hover:text-black" />
       </Button>
       <p
         className={`text-emerald-100/95 text-lg font-semibold ${orbitron.className}`}

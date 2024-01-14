@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import { MainLayoutContainer, Navbar, Sidebar } from "@/components";
 import { SidebarProvider } from "@/context";
 import { MediaPlayer } from "@/features/media-player";
+import { MediaPlayerProvider } from "@/features/media-player/context/media-player-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,22 +22,24 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SidebarProvider>
-          <div className="min-h-screen flex flex-grow flex-col bg-black/[.925] ">
-            <Navbar />
+          <MediaPlayerProvider>
+            <div className="min-h-screen flex flex-grow flex-col bg-black/[.925] ">
+              <Navbar />
 
-            <div className="flex-1 flex flex-col sm:flex-row m-4 gap-4">
-              <Sidebar />
-              <MainLayoutContainer>
-                <div className="absolute inset-0 overflow-auto">
-                  {/* This is where main content goes */}
-                  {children}
-                  {/* Main Content End */}
-                </div>
-              </MainLayoutContainer>
+              <div className="flex-1 flex flex-col sm:flex-row m-4 gap-4">
+                <Sidebar />
+                <MainLayoutContainer>
+                  <div className="absolute inset-0 overflow-auto">
+                    {/* This is where main content goes */}
+                    {children}
+                    {/* Main Content End */}
+                  </div>
+                </MainLayoutContainer>
+              </div>
+
+              <MediaPlayer />
             </div>
-
-            <MediaPlayer />
-          </div>
+          </MediaPlayerProvider>
         </SidebarProvider>
       </body>
     </html>
