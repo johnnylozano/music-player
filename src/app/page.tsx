@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="">
       <p className="text-white">Hello</p>
     </main>
   );

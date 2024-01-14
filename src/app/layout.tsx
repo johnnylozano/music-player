@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { MainLayoutContainer, Navbar, Sidebar } from "@/components";
 import { SidebarProvider } from "@/context";
+import { MediaPlayer } from "@/features/media-player";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +35,7 @@ export default function RootLayout({
               </MainLayoutContainer>
             </div>
 
-            {/* <MediaPlayer /> */}
+            <MediaPlayer />
           </div>
         </SidebarProvider>
       </body>

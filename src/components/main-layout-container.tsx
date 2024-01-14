@@ -16,7 +16,7 @@ function MainLayoutContainer({ children }: MainLayoutContainerProps) {
   return (
     <div
       className={cn(
-        "relative transition-all duration-300 ease-in-out flex-1 bg-gray-700 rounded-lg shadow-md shadow-lime-400/[.10] ml-52",
+        "relative transition-all duration-300 ease-in-out flex-1 bg-gray-700 rounded-lg shadow-md shadow-lime-400/[.10]",
         isOpen
       )}
     >
