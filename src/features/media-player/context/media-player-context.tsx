@@ -30,8 +30,11 @@ type MediaPlayerContextValues = {
   selectedSong: TSong;
   audioRef: RefObject<HTMLAudioElement> | null;
   isPlaying: boolean;
+  isMuted: boolean;
   volume: number;
   togglePlayback: () => void;
+  adjustVolume: (newVolume: number) => void;
+  toggleMuted: () => void;
 };
 
 const MediaPlayerContext = createContext<MediaPlayerContextValues | null>(null);
@@ -44,6 +47,7 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
   const [selectedSong, setSelectedSong] = useState<TSong>(DEMO_SONG);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.2);
+  const [isMuted, setIsMuted] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -61,13 +65,42 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
     }
   }, [isPlaying]);
 
+  useEffect(() => {
+    if (audioRef.current !== null) {
+      audioRef.current.volume = isMuted ? 0 : volume;
+    }
+  }, [volume, isMuted]);
+
   const togglePlayback = useCallback(() => {
     setIsPlaying(!isPlaying);
   }, [isPlaying]);
 
+  const adjustVolume = useCallback(
+    (newVolume: number) => {
+      if (isMuted) {
+        setIsMuted(false);
+      }
+      setVolume(newVolume);
+    },
+    [isMuted]
+  );
+
+  const toggleMuted = useCallback(() => {
+    setIsMuted(!isMuted);
+  }, [isMuted]);
+
   return (
     <MediaPlayerContext.Provider
-      value={{ selectedSong, audioRef, isPlaying, volume, togglePlayback }}
+      value={{
+        selectedSong,
+        audioRef,
+        isPlaying,
+        volume,
+        togglePlayback,
+        adjustVolume,
+        isMuted,
+        toggleMuted,
+      }}
     >
       {children}
     </MediaPlayerContext.Provider>

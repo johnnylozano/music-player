@@ -20,6 +20,7 @@ function TrackInfo() {
           className="block w-auto h-full object-cover rounded-sm"
           width={325}
           height={325}
+          priority={true}
         />
       </div>
       <div className="flex flex-col items-start -mt-1 justify-center">
