@@ -8,10 +8,19 @@ import {
   MdSkipPrevious,
 } from "react-icons/md";
 import { useMediaPlayer } from "../context/media-player-context";
+import { formatTime } from "@/lib/utils";
 
 function PlaybackControls() {
-  const { selectedSong, isPlaying, audioRef, togglePlayback } =
-    useMediaPlayer();
+  const {
+    selectedSong,
+    isPlaying,
+    audioRef,
+    elapsedTime,
+    remainingTime,
+    duration,
+    togglePlayback,
+    handleSliderChange,
+  } = useMediaPlayer();
 
   const PlayPauseIcon = isPlaying ? MdPause : MdPlayArrow;
 
@@ -32,9 +41,18 @@ function PlaybackControls() {
         </button>
       </div>
       <div className="flex-1 flex gap-3 justify-center items-center">
-        <p className="text-white/70 text-xs">0:32</p>
-        <Slider defaultValue={[0]} max={100} step={1} />
-        <p className="text-white/70 text-xs">4:37</p>
+        <p className="text-white/70 text-xs">
+          {`${formatTime(elapsedTime)}` ?? "0:00"}
+        </p>
+        <Slider
+          value={[elapsedTime]}
+          max={duration}
+          step={1}
+          onValueChange={handleSliderChange}
+        />
+        <p className="text-white/70 text-xs">
+          {`${formatTime(remainingTime)}` ?? "0:00"}
+        </p>
         <audio
           ref={audioRef}
           src={selectedSong?.audioSrc}

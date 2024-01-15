@@ -32,9 +32,13 @@ type MediaPlayerContextValues = {
   isPlaying: boolean;
   isMuted: boolean;
   volume: number;
+  elapsedTime: number;
+  remainingTime: number;
+  duration: number;
   togglePlayback: () => void;
   adjustVolume: (newVolume: number) => void;
   toggleMuted: () => void;
+  handleSliderChange: (values: number[]) => void;
 };
 
 const MediaPlayerContext = createContext<MediaPlayerContextValues | null>(null);
@@ -48,6 +52,9 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.2);
   const [isMuted, setIsMuted] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  // const [remainingTime, setRemainingTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -71,6 +78,50 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
     }
   }, [volume, isMuted]);
 
+  useEffect(() => {
+    function handleLoadedMetadata() {
+      console.log("handleLoadedMetadata");
+      if (audioRef.current !== null) {
+        const duration = audioRef.current.duration;
+        setDuration(duration);
+        setElapsedTime(0);
+      }
+    }
+
+    if (audioRef.current !== null) {
+      audioRef.current.load(); // Ensures that audio triggers loadedmetadata
+      audioRef.current.addEventListener("loadedmetadata", handleLoadedMetadata);
+    }
+
+    return () => {
+      if (audioRef.current !== null) {
+        audioRef.current.removeEventListener(
+          "loadedmetadata",
+          handleLoadedMetadata
+        );
+      }
+    };
+  }, [selectedSong?.audioSrc]);
+
+  useEffect(() => {
+    function handleTimeUpdate() {
+      if (audioRef.current !== null) {
+        const currentTime = audioRef.current.currentTime;
+        setElapsedTime(currentTime);
+      }
+    }
+
+    if (audioRef.current !== null) {
+      audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+    }
+
+    return () => {
+      if (audioRef.current !== null) {
+        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      }
+    };
+  }, []);
+
   const togglePlayback = useCallback(() => {
     setIsPlaying(!isPlaying);
   }, [isPlaying]);
@@ -89,6 +140,15 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
     setIsMuted(!isMuted);
   }, [isMuted]);
 
+  const handleSliderChange = useCallback((values: number[]) => {
+    const newTime = values[0];
+    if (audioRef.current) {
+      audioRef.current.currentTime = newTime;
+    }
+  }, []);
+
+  const remainingTime = duration - elapsedTime;
+
   return (
     <MediaPlayerContext.Provider
       value={{
@@ -96,7 +156,11 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
         audioRef,
         isPlaying,
         volume,
+        elapsedTime,
+        remainingTime,
+        duration,
         togglePlayback,
+        handleSliderChange,
         adjustVolume,
         isMuted,
         toggleMuted,
