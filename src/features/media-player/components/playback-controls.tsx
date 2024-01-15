@@ -10,10 +10,10 @@ import {
 import { useMediaPlayer } from "../context/media-player-context";
 import { formatTime } from "@/lib/utils";
 import {
-  Tooltip,
-  TooltipContent,
   TooltipProvider,
+  Tooltip,
   TooltipTrigger,
+  TooltipContent,
 } from "@/components/ui/tooltip";
 
 function PlaybackControls() {

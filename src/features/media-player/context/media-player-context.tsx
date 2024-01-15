@@ -19,8 +19,8 @@ type TSong = {
 } | null;
 
 const DEMO_SONG = {
-  songName: "Song Title Name",
-  songArtist: "Artist",
+  songName: "Take It Easy",
+  songArtist: "Bvrnout ft. Mia Vaile",
   imageSrc: "https://sandpack-bundler.vercel.app/img/take-it-easy.png",
   audioSrc:
     "https://storage.googleapis.com/joshwcomeau/bvrnout-take-it-easy-short.mp3",
@@ -83,7 +83,6 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
 
   useEffect(() => {
     function handleLoadedMetadata() {
-      console.log("handleLoadedMetadata");
       if (audioRef.current !== null) {
         const duration = audioRef.current.duration;
         setDuration(duration);

@@ -2,6 +2,9 @@
 
 import { useSidebarToggle } from "@/context";
 import { cn } from "@/lib/utils";
+import { HomeIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
+import { SideNavLinks } from "./sidebar-nav-links";
 
 function Sidebar() {
   const { isSidebarOpen } = useSidebarToggle();
@@ -11,12 +14,12 @@ function Sidebar() {
   return (
     <div
       className={cn(
-        "transition-transform duration-300 ease-in-out z-10 translate-x-0",
+        "transition-transform duration-300 ease-in-out z-10",
         isOpen
       )}
     >
-      <div className="bg-blue-300 h-full w-52 fixed rounded-lg shadow-md shadow-lime-400/[.10]">
-        <p className="text-white">Sidebar</p>
+      <div className="flex flex-col gap-2 bg-zinc-800 border border-zinc-800 px-2 py-4 h-full w-52 fixed rounded-lg shadow-lg shadow-black/30">
+        <SideNavLinks />
       </div>
     </div>
   );
