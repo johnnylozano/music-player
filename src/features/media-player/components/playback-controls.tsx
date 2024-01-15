@@ -16,6 +16,7 @@ function PlaybackControls() {
     isPlaying,
     audioRef,
     elapsedTime,
+    displayElapsedTime,
     remainingTime,
     duration,
     togglePlayback,
@@ -42,7 +43,7 @@ function PlaybackControls() {
       </div>
       <div className="flex-1 flex gap-3 justify-center items-center">
         <p className="text-white/70 text-xs">
-          {`${formatTime(elapsedTime)}` ?? "0:00"}
+          {`${formatTime(displayElapsedTime)}` ?? "0:00"}
         </p>
         <Slider
           value={[elapsedTime]}

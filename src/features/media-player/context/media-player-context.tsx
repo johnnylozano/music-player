@@ -33,6 +33,7 @@ type MediaPlayerContextValues = {
   isMuted: boolean;
   volume: number;
   elapsedTime: number;
+  displayElapsedTime: number;
   remainingTime: number;
   duration: number;
   togglePlayback: () => void;
@@ -53,7 +54,7 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
   const [volume, setVolume] = useState(0.2);
   const [isMuted, setIsMuted] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
-  // const [remainingTime, setRemainingTime] = useState(0);
+  const [displayElapsedTime, setDisplayElapsedTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -108,6 +109,7 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
       if (audioRef.current !== null) {
         const currentTime = audioRef.current.currentTime;
         setElapsedTime(currentTime);
+        setDisplayElapsedTime(Math.floor(currentTime));
       }
     }
 
@@ -147,7 +149,8 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
     }
   }, []);
 
-  const remainingTime = duration - elapsedTime;
+  const songLength = duration;
+  const remainingTime = songLength - displayElapsedTime;
 
   return (
     <MediaPlayerContext.Provider
@@ -157,6 +160,7 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
         isPlaying,
         volume,
         elapsedTime,
+        displayElapsedTime,
         remainingTime,
         duration,
         togglePlayback,
