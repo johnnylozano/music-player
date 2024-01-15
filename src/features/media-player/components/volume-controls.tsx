@@ -9,10 +9,16 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
+import { useKeyboardShortcut } from "@/hooks";
 
 function VolumeControls() {
   const { volume, adjustVolume, isMuted, toggleMuted } = useMediaPlayer();
   const MuteIcon = isMuted ? SpeakerOffIcon : SpeakerLoudIcon;
+
+  useKeyboardShortcut(toggleMuted, {
+    ctrlKey: true,
+    code: "KeyM",
+  });
 
   return (
     <div className="flex-1 flex items-center gap-3 justify-end">

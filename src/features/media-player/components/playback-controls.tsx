@@ -15,6 +15,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
+import { useKeyboardShortcut } from "@/hooks";
 
 function PlaybackControls() {
   const {
@@ -32,6 +33,10 @@ function PlaybackControls() {
   } = useMediaPlayer();
 
   const PlayPauseIcon = isPlaying ? MdPause : MdPlayArrow;
+
+  useKeyboardShortcut(togglePlayback, {
+    code: "Space",
+  });
 
   return (
     <div className="flex-1 flex flex-col justify-center h-full">
