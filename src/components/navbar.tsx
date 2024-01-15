@@ -47,7 +47,7 @@ function Navbar() {
               <span className="mt-4 text-gray-300 text-sm font-medium flex justify-between">
                 Toggle Play/Pause
                 <kbd className="bg-zinc-800 border shadow shadow-gray-200/10 border-white/25 px-1.5 rounded flex-none">
-                  Space
+                  Ctrl + Space
                 </kbd>
               </span>
               <span className="mt-4 text-gray-300 text-sm font-medium flex justify-between">

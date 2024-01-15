@@ -34,7 +34,12 @@ function PlaybackControls() {
 
   const PlayPauseIcon = isPlaying ? MdPause : MdPlayArrow;
 
-  useKeyboardShortcut(togglePlayback, {
+  function togglePlaybackShortcut(event: Event) {
+    event.preventDefault();
+    togglePlayback();
+  }
+
+  useKeyboardShortcut(togglePlaybackShortcut, {
     code: "Space",
   });
 

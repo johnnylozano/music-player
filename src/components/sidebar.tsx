@@ -18,7 +18,7 @@ function Sidebar() {
         isOpen
       )}
     >
-      <div className="flex flex-col gap-2 bg-zinc-800 border border-zinc-800 px-2 py-4 h-full w-52 fixed rounded-lg shadow-lg shadow-black/30">
+      <div className="flex flex-col gap-2 bg-zinc-800 px-2 py-4 h-full w-52 fixed rounded-lg shadow-lg shadow-black/50">
         <SideNavLinks />
       </div>
     </div>

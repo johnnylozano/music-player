@@ -1,5 +1,6 @@
 "use client";
 
+import { TSong } from "@/lib/types";
 import {
   ReactNode,
   RefObject,
@@ -10,13 +11,6 @@ import {
   useRef,
   useState,
 } from "react";
-
-type TSong = {
-  songName: string;
-  songArtist: string;
-  imageSrc: string;
-  audioSrc: string;
-} | null;
 
 const DEMO_SONG = {
   songName: "Take It Easy",
