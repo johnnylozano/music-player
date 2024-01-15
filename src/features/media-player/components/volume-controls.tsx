@@ -3,6 +3,12 @@ import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import { SpeakerLoudIcon, SpeakerOffIcon } from "@radix-ui/react-icons";
 import { useMediaPlayer } from "../context/media-player-context";
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 
 function VolumeControls() {
   const { volume, adjustVolume, isMuted, toggleMuted } = useMediaPlayer();
@@ -10,12 +16,18 @@ function VolumeControls() {
 
   return (
     <div className="flex-1 flex items-center gap-3 justify-end">
-      <button
-        className="rounded-full p-3 hover:bg-white/25 transition-all duration-150"
-        onClick={toggleMuted}
-      >
-        <MuteIcon className="w-4 h-4 text-white" />
-      </button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger
+            className="rounded-full p-3 hover:bg-white/25 transition-all duration-150"
+            onClick={toggleMuted}
+          >
+            <MuteIcon className="w-4 h-4 text-white" />
+          </TooltipTrigger>
+          <TooltipContent>{isMuted ? "Unmute" : "Mute"}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
       <Slider
         className={cn("w-[30%] h-2")}
         min={0}

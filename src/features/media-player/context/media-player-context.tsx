@@ -40,6 +40,8 @@ type MediaPlayerContextValues = {
   adjustVolume: (newVolume: number) => void;
   toggleMuted: () => void;
   handleSliderChange: (values: number[]) => void;
+  skipPrevious: () => void;
+  skipNext: () => void;
 };
 
 const MediaPlayerContext = createContext<MediaPlayerContextValues | null>(null);
@@ -149,6 +151,19 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
     }
   }, []);
 
+  const skipPrevious = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+    }
+  }, []);
+
+  const skipNext = useCallback(() => {
+    if (audioRef.current) {
+      setIsPlaying(false);
+      audioRef.current.currentTime = duration;
+    }
+  }, []);
+
   const songLength = duration;
   const remainingTime = songLength - displayElapsedTime;
 
@@ -168,6 +183,8 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
         adjustVolume,
         isMuted,
         toggleMuted,
+        skipPrevious,
+        skipNext,
       }}
     >
       {children}
