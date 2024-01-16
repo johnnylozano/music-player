@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-musicplayer-dev-82228-authRole",
+      "UnauthRoleArn": "arn:aws:iam::525547770451:role/amplify-musicplayer-dev-82228-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::525547770451:role/amplify-musicplayer-dev-82228-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-musicplayer-dev-82228-deployment",
+      "UnauthRoleName": "amplify-musicplayer-dev-82228-unauthRole",
+      "StackName": "amplify-musicplayer-dev-82228",
+      "StackId": "arn:aws:cloudformation:us-east-1:525547770451:stack/amplify-musicplayer-dev-82228/4d7a0da0-b472-11ee-825b-0e523f99d1fd",
+      "AmplifyAppId": "d15avnue70ibti"
+    },
+    "categories": {
+      "api": {
+        "musicplayer": {}
+      },
+      "auth": {
+        "musicplayer135ba597": {}
+      },
+      "storage": {
+        "songStorage": {}
+      }
+    }
+  }
+}
