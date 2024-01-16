@@ -13,6 +13,7 @@ import {
 } from "react";
 
 const DEMO_SONG = {
+  id: "test",
   songName: "Take It Easy",
   songArtist: "Bvrnout ft. Mia Vaile",
   imageSrc: "https://sandpack-bundler.vercel.app/img/take-it-easy.png",
