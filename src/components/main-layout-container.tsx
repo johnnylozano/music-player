@@ -1,6 +1,6 @@
 "use client";
 
-import { useSidebarToggle } from "@/context";
+import { useSidebarToggle } from "@/context/sidebar-context";
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 

@@ -1,5 +1,6 @@
 import { FeaturedSongs, SongCardSkeleton } from "@/components";
 import { range } from "@/lib/utils";
+import { generateClient } from "aws-amplify/api";
 import { Suspense } from "react";
 
 const DEMO_SONG = {
@@ -11,6 +12,8 @@ const DEMO_SONG = {
 };
 
 export default function Home() {
+  const client = generateClient();
+
   return (
     <main className="p-12">
       <p className="text-white text-4xl font-extrabold">Featured</p>

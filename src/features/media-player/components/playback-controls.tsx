@@ -20,6 +20,7 @@ import { useKeyboardShortcut } from "@/hooks";
 function PlaybackControls() {
   const {
     selectedSong,
+    audioSrc,
     isPlaying,
     audioRef,
     elapsedTime,
@@ -96,7 +97,7 @@ function PlaybackControls() {
         </p>
         <audio
           ref={audioRef}
-          src={selectedSong?.audioSrc}
+          src={audioSrc?.url.href ?? undefined}
           onEnded={togglePlayback}
         />
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useSidebarToggle } from "@/context";
+import { useSidebarToggle } from "@/context/sidebar-context";
 import {
   GearIcon,
   GitHubLogoIcon,
@@ -63,7 +63,6 @@ function Navbar() {
               <GearIcon className="h-5 w-5 text-gray-200" />
             </button>
           </SheetTrigger>
-          {/* @ts-expect-error */}
           <SheetContent className="bg-zinc-700/95">
             <SheetHeader>
               <SheetTitle className="text-gray-200">

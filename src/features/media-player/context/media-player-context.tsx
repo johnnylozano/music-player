@@ -1,6 +1,12 @@
 "use client";
 
+import { usePlaylist } from "@/features/playlist";
 import { TSong } from "@/lib/types";
+import { Amplify } from "aws-amplify";
+import config from "@/amplifyconfiguration.json";
+import { generateClient } from "aws-amplify/api";
+
+import { GetUrlOutput, getUrl } from "aws-amplify/storage";
 import {
   ReactNode,
   RefObject,
@@ -23,6 +29,7 @@ const DEMO_SONG = {
 
 type MediaPlayerContextValues = {
   selectedSong: TSong;
+  audioSrc: GetUrlOutput | null;
   audioRef: RefObject<HTMLAudioElement> | null;
   isPlaying: boolean;
   isMuted: boolean;
@@ -46,7 +53,12 @@ type MediaPlayerProviderProps = {
 };
 
 function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
-  const [selectedSong, setSelectedSong] = useState<TSong>(DEMO_SONG);
+  Amplify.configure(config);
+
+  const client = generateClient();
+  const { selectedSong, skipNextSong, skipPreviousSong } = usePlaylist();
+
+  const [audioSrc, setAudioSrc] = useState<GetUrlOutput | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.2);
   const [isMuted, setIsMuted] = useState(false);
@@ -55,6 +67,24 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
   const [duration, setDuration] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  async function fetchAudio(key: string) {
+    const audioUrl = await getUrl({ key: key });
+    setAudioSrc(audioUrl);
+  }
+
+  useEffect(() => {
+    if (audioSrc && isPlaying) {
+      audioRef?.current?.play();
+    }
+  }, [audioSrc]);
+
+  useEffect(() => {
+    if (!selectedSong?.audioSrc) {
+      return;
+    }
+    fetchAudio(selectedSong.audioSrc);
+  }, [selectedSong]);
 
   useEffect(() => {
     if (audioRef.current !== null) {
@@ -146,17 +176,22 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
   }, []);
 
   const skipPrevious = useCallback(() => {
+    if (!audioRef.current) {
+      return;
+    }
+
+    if (audioRef.current.currentTime < 2) {
+      skipPreviousSong();
+    }
+    audioRef.current.currentTime = 0;
+  }, []);
+
+  function skipNext() {
+    skipNextSong();
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
     }
-  }, []);
-
-  const skipNext = useCallback(() => {
-    if (audioRef.current) {
-      setIsPlaying(false);
-      audioRef.current.currentTime = duration;
-    }
-  }, []);
+  }
 
   const songLength = duration;
   const remainingTime = songLength - displayElapsedTime;
@@ -165,6 +200,7 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
     <MediaPlayerContext.Provider
       value={{
         selectedSong,
+        audioSrc,
         audioRef,
         isPlaying,
         volume,
