@@ -10,4 +10,16 @@ function SongCardSkeleton() {
   );
 }
 
-export { SongCardSkeleton };
+function SearchResultCardSkeleton() {
+  return (
+    <div className="flex items-center bg-black/60 p-3 rounded-lg shadow shadow-black/20 animate-pulse">
+      <div className="flex-shrink-0 h-12 w-12 bg-gray-700 rounded-md"></div>
+      <div className="ml-4 flex-1">
+        <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
+        <div className="h-4 bg-gray-700 rounded w-1/2"></div>
+      </div>
+    </div>
+  );
+}
+
+export { SongCardSkeleton, SearchResultCardSkeleton };

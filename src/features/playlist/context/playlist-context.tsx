@@ -12,34 +12,8 @@ type PlaylistContextValues = {
   skipNextSong: () => void;
   skipPreviousSong: () => void;
   setSongList: (songs: TSong[]) => void;
+  setSongById: (songId: string) => void;
 };
-
-const DEMO_SONG_List = [
-  {
-    id: "test",
-    songName: "Take It Easy",
-    songArtist: "Bvrnout ft. Mia Vaile",
-    imageSrc: "https://sandpack-bundler.vercel.app/img/take-it-easy.png",
-    audioSrc:
-      "https://storage.googleapis.com/joshwcomeau/bvrnout-take-it-easy-short.mp3",
-  },
-  {
-    id: "test2",
-    songName: "Take It Easy 2",
-    songArtist: "Bvrnout ft. Mia Vaile",
-    imageSrc: "https://sandpack-bundler.vercel.app/img/take-it-easy.png",
-    audioSrc:
-      "https://storage.googleapis.com/joshwcomeau/bvrnout-take-it-easy-short.mp3",
-  },
-  {
-    id: "test3",
-    songName: "Take It Easy 3",
-    songArtist: "Bvrnout ft. Mia Vaile",
-    imageSrc: "https://sandpack-bundler.vercel.app/img/take-it-easy.png",
-    audioSrc:
-      "https://storage.googleapis.com/joshwcomeau/bvrnout-take-it-easy-short.mp3",
-  },
-];
 
 const PlaylistContext = createContext<PlaylistContextValues | null>(null);
 
@@ -50,6 +24,15 @@ function PlaylistProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     console.log("Logging index: ", currentSongIndex);
   }, [currentSongIndex]);
+
+  const setSongById = (songId: string) => {
+    if (!songList.length) return;
+
+    const songIndex = songList.findIndex((song) => song?.id === songId);
+    if (songIndex !== -1) {
+      setCurrentSongIndex(songIndex);
+    }
+  };
 
   function skipPreviousSong() {
     setCurrentSongIndex((prevIndex) => {
@@ -75,7 +58,13 @@ function PlaylistProvider({ children }: { children: ReactNode }) {
 
   return (
     <PlaylistContext.Provider
-      value={{ selectedSong, skipNextSong, skipPreviousSong, setSongList }}
+      value={{
+        selectedSong,
+        skipNextSong,
+        skipPreviousSong,
+        setSongList,
+        setSongById,
+      }}
     >
       {children}
     </PlaylistContext.Provider>

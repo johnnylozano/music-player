@@ -98,7 +98,7 @@ function PlaybackControls() {
         <audio
           ref={audioRef}
           src={audioSrc?.url.href ?? undefined}
-          onEnded={togglePlayback}
+          onEnded={skipNext}
         />
       </div>
     </div>
