@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJS Music Player
 
-## Getting Started
+A modern, feature-rich music player application built with NextJS, TypeScript, TailwindCSS, GraphQL, and AWS services.
 
-First, run the development server:
+**Live Demo:** [https://decepticars.netlify.app/](https://decepticars.netlify.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<img src="./demo/music-player.gif" alt="Demo of music player">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Table of Contents
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Music Credits](#music-credits)
 
-## Learn More
+## Overview
 
-To learn more about Next.js, take a look at the following resources:
+This project is a full-fledged music player web application, offering seamless music streaming, advanced search functionalities, and playlist management, all within a beautifully designed interface.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Stream music with a sleek and intuitive music player
+- Search functionality to explore songs.
+- Reliable access to song data through AWS DynamoDB
+- Cloud hosted media using AWS S3
+- Keyboard shortcuts for convienent experience
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- NextJS
+- TypeScript
+- TailwindCSS
+- GraphQL
+- AWS (DynamoDB, S3, etc.)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## Music Credits
+
+**1. James Mercy - Vienna (feat. PhiloSofie) [NCS Release]**
+
+- Music provided by NoCopyrightSounds
+- [Free Download/Stream](http://ncs.io/Vienna)
+- [Watch on YouTube](http://ncs.lnk.to/ViennaAT/youtube)
+
+**2. BVRNOUT - Take It Easy (feat. Mia Vaile) (DNB Edit) [NCS Release]**
+
+- Music provided by NoCopyrightSounds
+- [Free Download/Stream](http://NCS.io/TakeItEasyDNB)
+- [Watch on YouTube](http://youtu.be/)
+
+**3. MADZI, SVRT & Chilly - Sinister [Arcade Release]**
+
+- Music provided by NoCopyrightSounds
+- [Free Download/Stream](http://ncs.io/sinister)
+- [Watch on YouTube](http://ncs.lnk.to/sinisterAT/youtube)
+
+**4. NO QVLT - Insides (feat. JESSY KVGE) [Arcade Release]**
+
+- Music provided by NoCopyrightSounds
+- [Free Download/Stream](http://ncs.io/Insides)
+- [Watch on YouTube](http://youtu.be/)

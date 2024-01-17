@@ -68,7 +68,7 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
     if (audioSrc && isPlaying) {
       audioRef?.current?.play();
     }
-  }, [audioSrc]);
+  }, [audioSrc, isPlaying]);
 
   useEffect(() => {
     if (!selectedSong?.audioSrc) {
@@ -98,22 +98,24 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
   }, [volume, isMuted]);
 
   useEffect(() => {
+    const audioElement = audioRef.current;
+
     function handleLoadedMetadata() {
-      if (audioRef.current !== null) {
-        const duration = audioRef.current.duration;
+      if (audioElement !== null) {
+        const duration = audioElement.duration;
         setDuration(duration);
         setElapsedTime(0);
       }
     }
 
-    if (audioRef.current !== null) {
-      audioRef.current.load(); // Ensures that audio triggers loadedmetadata
-      audioRef.current.addEventListener("loadedmetadata", handleLoadedMetadata);
+    if (audioElement !== null) {
+      audioElement.load(); // Ensures that audio triggers loadedmetadata
+      audioElement.addEventListener("loadedmetadata", handleLoadedMetadata);
     }
 
     return () => {
-      if (audioRef.current !== null) {
-        audioRef.current.removeEventListener(
+      if (audioElement !== null) {
+        audioElement.removeEventListener(
           "loadedmetadata",
           handleLoadedMetadata
         );
@@ -122,21 +124,23 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
   }, [selectedSong?.audioSrc]);
 
   useEffect(() => {
+    const audioElement = audioRef.current;
+
     function handleTimeUpdate() {
-      if (audioRef.current !== null) {
-        const currentTime = audioRef.current.currentTime;
+      if (audioElement !== null) {
+        const currentTime = audioElement.currentTime;
         setElapsedTime(currentTime);
         setDisplayElapsedTime(Math.floor(currentTime));
       }
     }
 
-    if (audioRef.current !== null) {
-      audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+    if (audioElement !== null) {
+      audioElement.addEventListener("timeupdate", handleTimeUpdate);
     }
 
     return () => {
-      if (audioRef.current !== null) {
-        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      if (audioElement !== null) {
+        audioElement.removeEventListener("timeupdate", handleTimeUpdate);
       }
     };
   }, []);
@@ -175,7 +179,7 @@ function MediaPlayerProvider({ children }: MediaPlayerProviderProps) {
       skipPreviousSong();
     }
     audioRef.current.currentTime = 0;
-  }, []);
+  }, [skipPreviousSong]);
 
   function skipNext() {
     skipNextSong();

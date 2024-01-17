@@ -47,7 +47,7 @@ function SideNavLinks() {
             />
             <p
               className={cn(
-                "font-bold text-gray-300 cursor-default",
+                "font-bold text-gray-300 cursor-pointer",
                 {
                   "text-white": pathname === link.href,
                 },

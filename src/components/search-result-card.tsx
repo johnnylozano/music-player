@@ -1,5 +1,7 @@
 "use client";
 
+import { useMediaPlayer } from "@/features/media-player/context";
+import { usePlaylist } from "@/features/playlist";
 import { TSong } from "@/lib/types";
 import { GetUrlOutput, getUrl } from "aws-amplify/storage";
 import Image from "next/image";
@@ -7,6 +9,9 @@ import { useEffect, useState } from "react";
 import { MdPlayArrow } from "react-icons/md";
 
 function SearchResultCard({ song }: { song: TSong }) {
+  const { setSongById } = usePlaylist();
+  const { isPlaying, togglePlayback } = useMediaPlayer();
+
   const [image, setImage] = useState<GetUrlOutput | null>(null);
 
   async function fetchImage(key: string) {
@@ -21,8 +26,18 @@ function SearchResultCard({ song }: { song: TSong }) {
 
   if (song === null || image === null) return;
 
+  function handleClick(songId: string) {
+    setSongById(songId);
+    if (!isPlaying) {
+      togglePlayback();
+    }
+  }
+
   return (
-    <div className="group flex items-center cursor-pointer bg-black/60 p-3 rounded-lg hover:bg-zinc-700/90 shadow shadow-black/20 transition-colors duration-150">
+    <div
+      onClick={() => handleClick(song!.id)}
+      className="group flex items-center cursor-pointer bg-black/60 p-3 rounded-lg hover:bg-zinc-700/90 shadow shadow-black/20 transition-colors duration-150"
+    >
       <div className="flex-shrink-0 relative">
         <Image
           src={image.url.href}

@@ -3,7 +3,6 @@ import { client } from "@/config";
 import { Suspense } from "react";
 import { SearchResultCard, SearchResultCardSkeleton } from "@/components";
 import { range } from "@/lib/utils";
-import { Playlist } from "./playlist";
 
 async function SearchResults({ query }: { query: string | string[] }) {
   const songData = await client.graphql({
@@ -18,10 +17,9 @@ async function SearchResults({ query }: { query: string | string[] }) {
 
   return (
     <div className="flex flex-col gap-2 mt-12">
-      <Playlist songs={songList} />
       <Suspense
-        fallback={range(8).map(() => (
-          <SearchResultCardSkeleton />
+        fallback={range(8).map((index) => (
+          <SearchResultCardSkeleton key={index} />
         ))}
       >
         {songList.map((song) => (

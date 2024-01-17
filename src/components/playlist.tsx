@@ -9,7 +9,7 @@ function Playlist({ songs }: { songs: TSong[] }) {
 
   useEffect(() => {
     setSongList(songs);
-  }, [songs]);
+  }, [songs, setSongList]);
 
   return null;
 }
