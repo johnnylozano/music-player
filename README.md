@@ -2,7 +2,7 @@
 
 A modern, feature-rich music player application built with NextJS, TypeScript, TailwindCSS, GraphQL, and AWS services.
 
-**Live Demo:** [https://decepticars.netlify.app/](https://decepticars.netlify.app/)
+**Live Demo:** [https://music-player.johnnylozano.dev/](https://music-player.johnnylozano.dev/)
 
 <img src="./demo/music-player.gif" alt="Demo of music player">
 
