@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-// @ts-expect-error
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 

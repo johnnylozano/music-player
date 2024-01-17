@@ -42,6 +42,7 @@ function PlaybackControls() {
 
   useKeyboardShortcut(togglePlaybackShortcut, {
     code: "Space",
+    ctrlKey: true,
   });
 
   return (
