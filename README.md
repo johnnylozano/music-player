@@ -32,8 +32,8 @@ This project is a full-fledged music player web application, offering seamless m
 - NextJS
 - TypeScript
 - TailwindCSS
-- GraphQL
-- AWS (DynamoDB, S3, etc.)
+- REST API
+- AWS (S3, etc.)
 
 ---
 
@@ -51,7 +51,7 @@ This project is a full-fledged music player web application, offering seamless m
 - [Free Download/Stream](http://NCS.io/TakeItEasyDNB)
 - [Watch on YouTube](http://youtu.be/)
 
-**3. MADZI, SVRT & Chilly - Sinister [Arcade Release]**
+**3. MADZI, SVRT & Chilly - Rhapsody [Arcade Release]**
 
 - Music provided by NoCopyrightSounds
 - [Free Download/Stream](http://ncs.io/sinister)
