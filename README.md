@@ -1,6 +1,6 @@
 # NextJS Music Player
 
-A modern, feature-rich music player application built with NextJS, TypeScript, TailwindCSS, GraphQL, and AWS services.
+A modern, feature-rich music player application built with NextJS, TypeScript, TailwindCSS, and AWS services.
 
 **Live Demo:** [https://music-player.johnnylozano.dev/](https://music-player.johnnylozano.dev/)
 
@@ -23,7 +23,6 @@ This project is a full-fledged music player web application, offering seamless m
 
 - Stream music with a sleek and intuitive music player
 - Search functionality to explore songs.
-- Reliable access to song data through AWS DynamoDB
 - Cloud hosted media using AWS S3
 - Keyboard shortcuts for convienent experience
 
